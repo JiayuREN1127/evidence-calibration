@@ -1,0 +1,4 @@
+interface:
+  display_name: "证据核验与有条件判断"
+  short_description: "按明确的输入、核验流程和输出模板处理大量证据，避免夸大与过度保守"
+  default_prompt: "使用 $evidence-calibration 形成任务规格，执行逐项核验、抽查及补查，交付判断摘要、证据台账和检索核验记录。"
