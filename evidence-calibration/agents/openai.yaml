@@ -1,5 +1,5 @@
 interface:
-  display_name: "证据核验与有条件判断"
+  display_name: "evidence-calibration"
   short_description: "仅在用户明确调用时系统核验证据，交付可追溯记录及有条件判断"
   default_prompt: "使用 $evidence-calibration 形成任务规格，执行逐项核验、抽查及补查，交付判断摘要、证据台账和检索核验记录。"
 
