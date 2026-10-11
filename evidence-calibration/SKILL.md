@@ -1,7 +1,15 @@
 ---
 name: evidence-calibration
-description: Gather, verify, and synthesize evidence for research, technical investigations, comparisons, and other evidence-dependent tasks. Use when conclusions depend on numerous sources or observations, especially when users cannot inspect them individually. Apply risk-based verification while actively closing gaps and making conditional judgments. Not needed for purely creative tasks or mechanical edits without evidence claims.
+description: Run an evidence audit only when the user explicitly invokes $evidence-calibration or asks to use this skill's full verification workflow. Do not auto-invoke for research, comparisons, fact-checking, coding, data analysis, or skill maintenance.
 ---
+
+## 调用边界
+
+仅在用户明确调用 `$evidence-calibration`、要求使用本 skill，或要求执行本 skill 的完整核验流程时启用。仅提到名称、询问用法、检查或修改本 skill，不算调用。
+
+不根据任务主题自动启用。研究、方案比较、事实查证、代码修改与测试、常规数据分析等任务，即使需要证据，也按原任务要求执行；不自动叠加本 skill、扩展成 P1 至 P7 或生成核验台账。
+
+`agents/openai.yaml` 中的 `policy.allow_implicit_invocation: false` 用于支持该策略的宿主。其他 agent 仍须遵守上述调用边界。用户明确调用后，再执行下面的流程。
 
 ## 任务边界
 

@@ -2,7 +2,7 @@
 
 这是一个通用 agent skill，用于查找、核验和综合大量证据。当人工无法逐项检查来源和 AI 转述时，它要求 agent 核验关键论断、抽查其余证据、补查决定性缺口，并提出有条件的判断。
 
-它同时约束两种失败：把有限证据夸大成有效或适用，以及因存在不确定性而只交付“待核验”。适用于研究、技术调查、方案比较和其他依赖证据的任务，不限定学科。
+它同时约束两种失败：把有限证据夸大成有效或适用，以及因存在不确定性而只交付“待核验”。可用于研究、技术调查、方案比较和其他依赖证据的任务，不限定学科；仅在用户明确调用时执行，不按任务主题自动启用。
 
 ## 安装与使用
 
@@ -17,7 +17,16 @@
 
 这些是常见安装位置；实际发现机制以本机配置为准。目录最终应包含 `evidence-calibration/SKILL.md`。本 skill 不依赖特定搜索平台，也不要求自动调用其他 agent。
 
-在支持命名 skill 的环境中调用 `$evidence-calibration`。也可以明确要求 agent 阅读安装目录中的 `SKILL.md`，再执行任务。
+在支持命名 skill 的环境中调用 `$evidence-calibration`。也可以明确要求 agent 使用本 skill 或执行其完整核验流程。仅提到名称、询问用法、检查或修改 skill，不算调用。
+
+本仓库在 `evidence-calibration/agents/openai.yaml` 中设置以下策略，关闭 Codex 的隐式调用，同时保留显式调用。其他 agent 是否识别该配置以其实现为准；主文件同样规定仅手动调用的边界。
+
+```yaml
+policy:
+  allow_implicit_invocation: false
+```
+
+普通研究、查资料、方案比较、代码修改和数据分析不自动带入本 skill 的完整流程。
 
 示例请求：
 
@@ -62,7 +71,7 @@ deliveries/evidence-calibration/YYYYMMDD-HHMMSS-task-name/
 
 - [SKILL.md](evidence-calibration/SKILL.md) 定义输入、七步过程和交付要求。
 - [audit-protocol.md](evidence-calibration/references/audit-protocol.md) 提供字段、状态、抽样规则和输出模板。
-- [openai.yaml](evidence-calibration/agents/openai.yaml) 提供支持该元数据格式的环境所需的显示信息。
+- [openai.yaml](evidence-calibration/agents/openai.yaml) 提供显示信息及仅显式调用策略。
 
 ## 限制
 
